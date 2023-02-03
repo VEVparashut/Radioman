@@ -4,10 +4,36 @@ import org.junit.jupiter.api.Test;
 public class RadioTest {
 
     @Test
-    public void shouldSetRadio() {
-        Radio radio = new Radio();
+    public void test() {
+        Radio radio = new Radio(10, 100);
 
-        radio.setCurrentStation(5);
+        Assertions.assertEquals(0, radio.getMinStation());
+        Assertions.assertEquals(10, radio.getMaxStation());
+        Assertions.assertEquals(0, radio.getMinVolume());
+        Assertions.assertEquals(100, radio.getMaxVolume());
+        Assertions.assertEquals(0, radio.getCurrentStation());
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldSetNextMaxStation() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(9);
+
+        radio.setNextStation();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+        @Test
+    public void shouldPrevStation() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(6);
+
+        radio.setPrevStation();
 
         int expected = 5;
         int actual = radio.getCurrentStation();
@@ -34,45 +60,6 @@ public class RadioTest {
         radio.setCurrentStation(-2);
 
         int expected = 0;
-        int actual = radio.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetNextStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(2);
-
-        radio.setNextStation();
-
-        int expected = 3;
-        int actual = radio.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetNextMaxStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(9);
-
-        radio.setNextStation();
-
-        int expected = 0;
-        int actual = radio.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldPrevStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(6);
-
-        radio.setPrevStation();
-
-        int expected = 5;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
