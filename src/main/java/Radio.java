@@ -1,86 +1,51 @@
 public class Radio {
-    private int maxStation = 9;
-    private int minStation = 0;
-    private int currentStation = minStation;
-    private int maxVolume = 100;
-    private int minVolume = 0;
-    private int currentVolume = minVolume;
+    private int maxStation;
+    private int minStation;
+    private int currentStation;
+    private int maxVolume;
+    private int minVolume;
+    private int currentVolume;
 
-    public Radio(int sizeStation, int sizeVolume) {
-        maxStation = minStation + sizeStation;
-        maxVolume = minVolume + sizeVolume;
+
+    public Radio() {
+        this.maxStation = 9;
+        this.minStation = 0;
+        this.maxVolume = 100;
+        this.minVolume = 0;
+    }
+
+    public Radio(int sizeStation) {
+        this.maxStation = sizeStation - 1;
     }
 
     public int getCurrentStation() {
         return currentStation;
     }
 
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public int getMinVolume() {
-        return minVolume;
-    }
-
-    public Radio() {
-
-    }
-
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < minStation) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > maxStation) {
             return;
         }
         currentStation = newCurrentStation;
     }
+
     public void setNextStation() {
-        if (currentStation == 9) {
-            currentStation = -1;
+        if (currentStation != maxStation) {
+            currentStation++;
+            return;
         }
-        currentStation = currentStation + 1;
+        currentStation = minStation;
     }
 
     public void setPrevStation() {
-        if (currentStation == 0) {
-            currentStation = 10;
-        }
-        currentStation = currentStation - 1;
-    }
-
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0) {
+        if (currentStation != minStation) {
+            currentStation--;
             return;
         }
-        if (newCurrentVolume > 10) {
-            return;
-        }
-        currentVolume = newCurrentVolume;
-    }
-
-    public void increaseVolume() {
-        if (currentVolume < 10) {
-            currentVolume = currentVolume + 1;
+        currentStation = maxStation;
         }
     }
 
-    public void decreaseVolume() {
-        if (currentVolume > 0) {
-            currentVolume = currentVolume - 1;
-        }
-    }
-}
